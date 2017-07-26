@@ -10,7 +10,7 @@ public class Employee implements Serializable{
 
     private Long salary;//薪水，保存到分
 
-    private Integer deptId;
+    private Integer deptId; //部门Id
 
     public Integer getId() {
         return id;
