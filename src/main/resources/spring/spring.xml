@@ -18,15 +18,45 @@
 	<context:property-placeholder location="classpath:spring/spring.properties" ignore-unresolvable="true"/>
 	
 	<!-- 配置数据源，记得去掉myBatis-mapper.xml的数据源相关配置 -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">			
-		<property name="driverClass" value="${jdbc.driver}" />
-		<!--
-			一定要加上 ?useUnicode=true&amp;characterEncoding=utf-8 ，不然上传到数据库的时候会出现乱码问题
-		-->
-		<property name="jdbcUrl" value="${jdbc.url}" />
-		<property name="user" value="${jdbc.username}" />
+	<!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">			-->
+		<!--<property name="driverClass" value="${jdbc.driver}" />-->
+		<!--&lt;!&ndash;-->
+			<!--一定要加上 ?useUnicode=true&amp;characterEncoding=utf-8 ，不然上传到数据库的时候会出现乱码问题-->
+		<!--&ndash;&gt;-->
+		<!--<property name="jdbcUrl" value="${jdbc.url}" />-->
+		<!--<property name="user" value="${jdbc.username}" />-->
+		<!--<property name="password" value="${jdbc.password}" />-->
+	<!--</bean>-->
+
+	<!-- 配置druidDataSource -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
+
+		<!-- 最大连接池数量 -->
+		<property name="maxActive" value="20" />
+		<!-- 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时 -->
+		<property name="initialSize" value="1" />
+		<!-- 获取连接时最大等待时间，单位毫秒 -->
+		<property name="maxWait" value="60000" />
+		<property name="minIdle" value="1" />
+
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。 -->
+		<property name="poolPreparedStatements" value="false" />
+		<property name="maxOpenPreparedStatements" value="20" />
+
+		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+		<property name="filters" value="stat" />
 	</bean>
+
 	<!-- 配置session工厂 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

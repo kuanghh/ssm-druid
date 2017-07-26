@@ -12,6 +12,8 @@ public class Employee implements Serializable{
 
     private Integer deptId; //部门Id
 
+    private Dept dept;
+
     public Integer getId() {
         return id;
     }
@@ -42,5 +44,14 @@ public class Employee implements Serializable{
 
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
+    }
+
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 }

@@ -11,6 +11,8 @@ public class Manager {
 
     private Integer deptId;
 
+    private Dept dept;
+
     public Integer getId() {
         return id;
     }
@@ -41,6 +43,14 @@ public class Manager {
 
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 
     @Override

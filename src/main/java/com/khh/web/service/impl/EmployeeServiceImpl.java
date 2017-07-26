@@ -6,6 +6,8 @@ import com.khh.web.service._interface.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by 951087952@qq.com on 2017/7/25.
  */
@@ -17,5 +19,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Employee findById(int id) {
         return employeeMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        return employeeMapper.findAll();
     }
 }
