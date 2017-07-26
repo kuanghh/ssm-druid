@@ -1,11 +1,13 @@
 package com.khh.web.domain;
 
+import java.util.List;
+
 public class Manager {
     private Integer id;
 
     private String name;
 
-    private String interest;
+    private List<String> interest;
 
     private Integer deptId;
 
@@ -25,12 +27,12 @@ public class Manager {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getInterest() {
+    public List<String> getInterest() {
         return interest;
     }
 
-    public void setInterest(String interest) {
-        this.interest = interest == null ? null : interest.trim();
+    public void setInterest(List<String> interest) {
+        this.interest = interest;
     }
 
     public Integer getDeptId() {
@@ -39,5 +41,15 @@ public class Manager {
 
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
+    }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", interest=" + interest +
+                ", deptId=" + deptId +
+                '}';
     }
 }

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.khh.web.domain.Manager" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="interest" property="interest" jdbcType="VARCHAR" />
+    <result column="interest" property="interest" jdbcType="VARCHAR" typeHandler="com.khh.web.typehandlers.MyListTypeHandler" />
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -21,9 +21,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.khh.web.domain.Manager" >
-    insert into t_manager (id, name, interest, 
-      dept_id)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{interest,jdbcType=VARCHAR}, 
+    insert into t_manager (id, name, interest, dept_id)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+    #{interest,jdbcType=VARCHAR,javaType=List,typeHandler=com.khh.web.typehandlers.MyListTypeHandler},
       #{deptId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.khh.web.domain.Manager" >
